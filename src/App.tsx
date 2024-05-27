@@ -67,6 +67,20 @@ input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
   font-family: "Noto Sans KR", sans-serif;
 }
+.modal-enter {
+    transform: translate(-50%, -100%);
+  }
+  .modal-enter-active {
+    transform: translate(-50%, 10px);
+    transition: transform 500ms;
+  }
+  .modal-exit {
+    transform: translate(-50%, 10px);
+  }
+  .modal-exit-active {
+    transform: translate(-50%, -100%);
+    transition: transform 500ms;
+  }
 `;
 
 const Wrapper = styled.div`

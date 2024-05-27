@@ -26,6 +26,9 @@ const MenuItem = styled.div<{ selected?: boolean }>`
   width: 65px;
   height: 65px;
   background-color: ${({ selected }) => (selected ? '#729d39' : 'transparent')};
+  &:hover {
+    background-color: ${({ selected }) => (selected ? '#729d39' : '#f3f4f6')};
+  }
   svg {
     width: 50px;
     color: ${({ selected }) => (selected ? '#ffffff' : '#6f7787')};
