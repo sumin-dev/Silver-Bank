@@ -5,6 +5,7 @@ import { auth, db } from '../firebase';
 import { IAccount } from '../components/Timeline';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import LoadingScreen from '../components/LoadingScreen';
+import UpdateUserInfoModal from '../components/UpdateUserInfoModal';
 
 const Wrapper = styled.div`
   display: grid;
@@ -17,6 +18,25 @@ const Home: React.FC = () => {
   const user = auth.currentUser;
   const [account, setAccount] = useState<IAccount | null>(null);
   const [isLoading, setLoading] = useState<boolean>(true);
+  const [showModal, setModal] = useState<boolean>(false);
+
+  const onModalClose = () => {
+    setModal(false);
+  };
+
+  const checkFirstLogin = async () => {
+    if (!user) return;
+
+    const userQuery = query(
+      collection(db, 'users'),
+      where('userId', '==', user.uid)
+    );
+    const snapshot = await getDocs(userQuery);
+
+    if (!snapshot.docs.length) {
+      setModal(true);
+    }
+  };
 
   const fetchAccount = async () => {
     if (!user) return;
@@ -59,6 +79,8 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
+    checkFirstLogin();
+
     fetchAccount();
   }, []);
 
@@ -68,6 +90,7 @@ const Home: React.FC = () => {
 
   return (
     <Wrapper>
+      {showModal && <UpdateUserInfoModal onClose={onModalClose} />}
       <MyAccount account={account} />
     </Wrapper>
   );

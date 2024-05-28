@@ -49,6 +49,11 @@ const commonInputStyles = css`
   background-position: 20px;
 `;
 
+export const InputWithName = styled.input`
+  ${commonInputStyles}
+  background-image: url('/icons/name.svg');
+`;
+
 export const InputWithEmail = styled.input`
   ${commonInputStyles}
   background-image: url('/icons/email.svg');

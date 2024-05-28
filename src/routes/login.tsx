@@ -84,7 +84,6 @@ export default function Login() {
       navigate('/');
     } catch (error) {
       if (error instanceof FirebaseError) {
-        console.log(error);
         setError(handleFirebaseError(error));
       }
     } finally {
