@@ -11,7 +11,7 @@ import {
   Title,
   Wrapper,
 } from './AuthComponents';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import NumberPad from './NumberPad';
 
@@ -78,8 +78,8 @@ const UpdateUserInfoModal: React.FC<UpdateUserInfoModalProps> = ({
         userId: user.uid,
         username,
         paymentPassword,
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
         deletedAt: null,
       });
 

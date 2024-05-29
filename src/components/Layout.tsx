@@ -1,12 +1,11 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-// import { auth } from '../firebase';
 import HeaderBar from './HeaderBar';
 import { useEffect, useState } from 'react';
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 80px 1fr;
+  grid-template-columns: 120px 1fr;
   padding: 100px 0px;
   height: 100%;
   width: 100%;
@@ -16,21 +15,21 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
 `;
 
 const MenuItem = styled.div<{ selected?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 65px;
-  height: 65px;
+  margin-top: 30px;
+  width: 100px;
+  height: 100px;
   background-color: ${({ selected }) => (selected ? '#729d39' : 'transparent')};
   &:hover {
     background-color: ${({ selected }) => (selected ? '#729d39' : '#f3f4f6')};
   }
   svg {
-    width: 50px;
+    width: 70px;
     color: ${({ selected }) => (selected ? '#ffffff' : '#6f7787')};
     /* color: #6f7787; */
   }

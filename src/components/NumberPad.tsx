@@ -50,13 +50,13 @@ const NumberPad: React.FC<NumberPadProps> = ({
   const renderButton = (index: number) => {
     if (index === 5) {
       return (
-        <SpecialButton onClick={onDelete} type="button" key="delete">
+        <SpecialButton onClick={onDelete} type="button" key={index}>
           ⌫
         </SpecialButton>
       );
     } else if (index === 11) {
       return (
-        <SpecialButton onClick={onClear} type="button" key="clear">
+        <SpecialButton onClick={onClear} type="button" key={index}>
           𝗖
         </SpecialButton>
       );
@@ -64,7 +64,7 @@ const NumberPad: React.FC<NumberPadProps> = ({
       const number = numbers[index < 5 ? index : index - 1];
       return (
         <PadButton
-          key={number}
+          key={index}
           onClick={() => onNumberClick(number)}
           type="button"
         >

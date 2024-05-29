@@ -91,7 +91,7 @@ const Home: React.FC = () => {
   return (
     <Wrapper>
       {showModal && <UpdateUserInfoModal onClose={onModalClose} />}
-      <MyAccount account={account} />
+      <MyAccount account={account} setAccount={setAccount} />
     </Wrapper>
   );
 };

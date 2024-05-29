@@ -51,14 +51,14 @@ interface FormState {
   password: string;
 }
 
-export default function Login() {
+const Login: React.FC = () => {
   const navigate = useNavigate();
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [formState, setFormState] = useState<FormState>({
     email: '',
     password: '',
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string>('');
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -136,4 +136,6 @@ export default function Login() {
       </Switcher>
     </Wrapper>
   );
-}
+};
+
+export default Login;
