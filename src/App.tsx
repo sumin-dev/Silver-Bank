@@ -12,6 +12,8 @@ import ProtectedRoute from './components/ProtectedRoute.tsx';
 import AuthLayout from './components/AuthLayout.tsx';
 import Chart from './routes/chart.tsx';
 import Profile from './routes/profile.tsx';
+import Transfer from './routes/transfer.tsx';
+import TransferComplete from './routes/transfer-complete.tsx';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <Profile />,
+      },
+      {
+        path: 'transfer',
+        element: <Transfer />,
+      },
+      {
+        path: 'transfer-complete',
+        element: <TransferComplete />,
       },
     ],
   },
@@ -68,19 +78,19 @@ input:-webkit-autofill:active {
   font-family: "Noto Sans KR", sans-serif;
 }
 .modal-enter {
-    transform: translate(-50%, -100%);
-  }
-  .modal-enter-active {
-    transform: translate(-50%, 10px);
-    transition: transform 500ms;
-  }
-  .modal-exit {
-    transform: translate(-50%, 10px);
-  }
-  .modal-exit-active {
-    transform: translate(-50%, -100%);
-    transition: transform 500ms;
-  }
+  transform: translate(-50%, -100%);
+}
+.modal-enter-active {
+  transform: translate(-50%, 10px);
+  transition: transform 500ms;
+}
+.modal-exit {
+  transform: translate(-50%, 10px);
+}
+.modal-exit-active {
+  transform: translate(-50%, -100%);
+  transition: transform 500ms;
+}
 `;
 
 const Wrapper = styled.div`

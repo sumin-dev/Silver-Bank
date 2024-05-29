@@ -11,11 +11,11 @@ export const Header = styled.header`
   font-size: 0;
 `;
 export const Logo = styled.img`
-  height: 40px;
+  height: 60px;
 `;
 
 export const LogoText = styled.img`
-  height: 40px;
+  height: 60px;
 `;
 
 export default function HeaderBar() {

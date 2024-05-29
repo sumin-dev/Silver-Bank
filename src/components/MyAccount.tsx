@@ -1,34 +1,40 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { IAccount } from './Timeline';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { changeNumberToKorean } from '../utils/changeNumberToKorean';
-import { addDoc, collection } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  getDocs,
+  query,
+  serverTimestamp,
+  where,
+} from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { generateAccountNumber } from '../utils/generateAccountNumber';
 import { CSSTransition } from 'react-transition-group';
+import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.div`
-  padding: 30px;
+  padding: 60px;
 `;
 
 const Title = styled.h2`
   display: inline-block;
-  font-size: 36px;
-  line-height: 48px;
+  font-size: 48px;
   font-weight: 700;
   color: #171a1f;
 `;
 
 const AccountBtn = styled.button`
-  width: 144px;
-  height: 40px;
-  font-size: 20px;
+  width: 200px;
+  height: 52px;
+  font-size: 28px;
   color: #ffffff;
   background: #729d39;
   border: none;
   cursor: pointer;
-  margin-left: 20px;
+  margin-left: 30px;
   &:hover,
   &:active {
     background: #36622b;
@@ -36,11 +42,10 @@ const AccountBtn = styled.button`
 `;
 
 const InfoBox = styled.div`
-  padding: 30px;
+  padding: 60px;
   display: flex;
   flex-direction: column;
-  row-gap: 15px;
-  font-size: 24px;
+  row-gap: 20px;
   color: #171a1f;
 `;
 
@@ -48,8 +53,8 @@ const Info = styled.div`
   display: flex;
   align-items: center;
   svg {
-    width: 40px;
-    margin-right: 10px;
+    width: 48px;
+    margin-right: 20px;
     color: #9095a0;
     cursor: pointer;
     &:hover {
@@ -59,13 +64,13 @@ const Info = styled.div`
 `;
 
 const InfoText = styled.span`
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 600;
   color: #9095a0;
 `;
 
 const InfoTextWithClick = styled.span`
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 600;
   color: #9095a0;
   text-decoration: underline;
@@ -74,21 +79,33 @@ const InfoTextWithClick = styled.span`
 
 const Modal = styled.div`
   position: fixed;
-  top: 10px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #f3f4f6;
   color: #9095a0;
-  font-size: 18px;
+  font-size: 24px;
   padding: 20px 40px;
   border-radius: 5px;
 `;
 
-interface MyAccountProps {
-  account?: IAccount | null;
+export interface IAccount {
+  id: string;
+  number: string;
+  username: string;
+  userId: string;
+  valance: number;
+  createdAt: any;
+  updatedAt: any | null;
+  deletedAt: any | null;
 }
 
-const MyAccount: React.FC<MyAccountProps> = ({ account }) => {
+interface MyAccountProps {
+  account?: IAccount | null;
+  setAccount: React.Dispatch<React.SetStateAction<IAccount | null>>;
+}
+
+const MyAccount: React.FC<MyAccountProps> = ({ account, setAccount }) => {
   const { speak } = useSpeechSynthesis();
   const onSoundClick = (text: string) => {
     speak({ text });
@@ -101,20 +118,38 @@ const MyAccount: React.FC<MyAccountProps> = ({ account }) => {
     const maxValance = 100000000;
 
     try {
-      await addDoc(collection(db, 'accounts'), {
+      const userQuery = query(
+        collection(db, 'users'),
+        where('userId', '==', user.uid)
+      );
+
+      const snapshot = await getDocs(userQuery);
+      const doc = snapshot.docs[0];
+
+      const newAccount = {
+        id: doc.id,
         number: generateAccountNumber(),
         valance: Math.floor(
           Math.random() * (maxValance - minValance) + minValance
         ),
-        createdAt: Date.now(),
-        updatedAt: Date.now(),
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
         deletedAt: null,
-        username: user.displayName,
+        username: doc.data().username,
         userId: user.uid,
-      });
+      };
+
+      await addDoc(collection(db, 'accounts'), newAccount);
+
+      setAccount(newAccount);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
+  };
+
+  const navigate = useNavigate();
+  const onTransferClick = () => {
+    navigate('/transfer', { state: { account } });
   };
 
   const [copySuccess, setCopySuccess] = useState<boolean>(false);
@@ -133,7 +168,7 @@ const MyAccount: React.FC<MyAccountProps> = ({ account }) => {
     <Wrapper>
       <Title>내 계좌</Title>
       {account ? (
-        <AccountBtn>송금하기</AccountBtn>
+        <AccountBtn onClick={onTransferClick}>송금하기</AccountBtn>
       ) : (
         <AccountBtn onClick={onOpenAccountBtnClick}>+ 계좌 만들기</AccountBtn>
       )}

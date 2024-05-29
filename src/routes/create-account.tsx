@@ -23,15 +23,15 @@ interface FormState {
   confirmPassword: string;
 }
 
-export default function CreateAccount() {
+const CreateAccount: React.FC = () => {
   const navigate = useNavigate();
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [formState, setFormState] = useState<FormState>({
     email: '',
     password: '',
     confirmPassword: '',
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string>('');
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -127,4 +127,6 @@ export default function CreateAccount() {
       </Switcher>
     </Wrapper>
   );
-}
+};
+
+export default CreateAccount;
