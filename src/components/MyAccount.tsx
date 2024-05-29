@@ -46,7 +46,6 @@ const InfoBox = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 20px;
-  color: #171a1f;
 `;
 
 const Info = styled.div`
@@ -96,12 +95,12 @@ export interface IAccount {
   userId: string;
   valance: number;
   createdAt: any;
-  updatedAt: any | null;
+  updatedAt: any;
   deletedAt: any | null;
 }
 
 interface MyAccountProps {
-  account?: IAccount | null;
+  account: IAccount | null;
   setAccount: React.Dispatch<React.SetStateAction<IAccount | null>>;
 }
 
@@ -151,6 +150,9 @@ const MyAccount: React.FC<MyAccountProps> = ({ account, setAccount }) => {
   const onTransferClick = () => {
     navigate('/transfer', { state: { account } });
   };
+  const onTransactionClick = () => {
+    navigate('/transaction');
+  };
 
   const [copySuccess, setCopySuccess] = useState<boolean>(false);
   const nodeRef = useRef(null);
@@ -168,11 +170,14 @@ const MyAccount: React.FC<MyAccountProps> = ({ account, setAccount }) => {
     <Wrapper>
       <Title>내 계좌</Title>
       {account ? (
-        <AccountBtn onClick={onTransferClick}>송금하기</AccountBtn>
+        <>
+          <AccountBtn onClick={onTransferClick}>송금하기</AccountBtn>
+          <AccountBtn onClick={onTransactionClick}>거래내역</AccountBtn>
+        </>
       ) : (
         <AccountBtn onClick={onOpenAccountBtnClick}>+ 계좌 만들기</AccountBtn>
       )}
-      <AccountBtn>거래내역 보기</AccountBtn>
+
       {account ? (
         <InfoBox>
           <Info>
