@@ -14,6 +14,7 @@ import Chart from './routes/chart.tsx';
 import Profile from './routes/profile.tsx';
 import Transfer from './routes/transfer.tsx';
 import TransferComplete from './routes/transfer-complete.tsx';
+import Transaction from './routes/transaction.tsx';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: 'transfer-complete',
         element: <TransferComplete />,
+      },
+      {
+        path: 'transaction',
+        element: <Transaction />,
       },
     ],
   },
@@ -95,6 +100,7 @@ input:-webkit-autofill:active {
 
 const Wrapper = styled.div`
   height: 100vh;
+  min-width: 1400px;
   display: flex;
   justify-content: center;
   align-items: center;

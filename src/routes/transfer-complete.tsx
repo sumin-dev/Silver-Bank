@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { CSSTransition } from 'react-transition-group';
 import { useNavigate } from 'react-router-dom';
@@ -59,9 +59,17 @@ const TransferComplete: React.FC = () => {
     navigate('/');
   };
 
+  const nodeRef = useRef(null);
+
   return (
-    <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
-      <Wrapper>
+    <CSSTransition
+      in={true}
+      appear={true}
+      timeout={500}
+      classNames="fade"
+      nodeRef={nodeRef}
+    >
+      <Wrapper ref={nodeRef}>
         <Title>송금 완료!</Title>
         <Message>송금이 성공적으로 완료되었습니다.</Message>
         <Button onClick={handleHomeClick}>홈으로</Button>

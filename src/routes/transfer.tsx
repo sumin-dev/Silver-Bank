@@ -18,6 +18,9 @@ import { IAccount } from '../components/MyAccount';
 
 const Wrapper = styled.div`
   padding: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 `;
 
 const Title = styled.h2`
@@ -28,7 +31,7 @@ const Title = styled.h2`
 `;
 
 const Form = styled.form`
-  padding: 60px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   row-gap: 20px;
@@ -245,8 +248,10 @@ const Transfer: React.FC = () => {
       });
 
       batch.set(doc(collection(db, 'transactions')), {
-        from: account.number,
-        to: receiver,
+        senderName: account.username,
+        senderNumber: account.number,
+        receiverName: receiverDoc.data().username,
+        receiverNumber: receiver,
         amount: +amount,
         memo,
         createdAt: serverTimestamp(),
