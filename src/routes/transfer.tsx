@@ -20,12 +20,12 @@ const Wrapper = styled.div`
   padding: 60px;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 30px;
 `;
 
 const Title = styled.h2`
   display: inline-block;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 700;
   color: #171a1f;
 `;

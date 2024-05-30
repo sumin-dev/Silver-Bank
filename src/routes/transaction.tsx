@@ -23,15 +23,15 @@ const TitleBox = styled.div``;
 const Title = styled.h2`
   display: inline-block;
   margin-right: 20px;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 700;
   color: #171a1f;
 `;
 
 const FilterButton = styled.button<{ $active: boolean }>`
-  padding: 10px 20px;
+  padding: 5px 10px;
   margin: 0 10px;
-  font-size: 24px;
+  font-size: 20px;
   color: ${(props) => (props.$active ? '#ffffff' : '#171a1f')};
   background-color: ${(props) => (props.$active ? '#729d39' : '#ffffff')};
   border: 1px solid #729d39;
@@ -43,28 +43,30 @@ const FilterButton = styled.button<{ $active: boolean }>`
 `;
 
 const GridContainer = styled.div`
-  padding: 30px;
+  padding: 30px 30px 0px;
   display: grid;
   grid-template-columns: 1fr 1fr 1.5fr 1.5fr 2fr 2fr;
   width: 100%;
 `;
 
 const GridHeader = styled.div`
-  height: 61px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 46px;
   background-color: #729d39;
   color: white;
   padding: 18px;
-  text-align: center;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
   border-bottom: 1px solid #ddd;
 `;
 
 const GridCell = styled.div`
-  height: 53px;
+  height: 46px;
   padding: 14px;
   text-align: left;
-  font-size: 24px;
+  font-size: 22px;
   color: #9095a0;
   white-space: nowrap;
   overflow: hidden;
@@ -100,10 +102,10 @@ const Pagination = styled.div<{ $visible: boolean }>`
 `;
 
 const PageButton = styled.button<{ selected?: boolean }>`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   margin: 0 5px;
-  font-size: 20px;
+  font-size: 16px;
   color: ${(props) => (props.selected ? '#ffffff' : '#171a1f')};
   background-color: ${(props) => (props.selected ? '#729d39;' : '#ffffff')};
   border: 1px solid #f0f0f0;
@@ -118,10 +120,9 @@ const PageButton = styled.button<{ selected?: boolean }>`
 `;
 
 const PageButtonWithArrow = styled.button<{ disabled?: boolean }>`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   margin: 0 5px;
-  font-size: 20px;
   color: ${(props) => (props.disabled ? '#ccc' : '#171a1f')};
   background-color: ${(props) => (props.disabled ? '#f0f0f0' : '#ffffff')};
   border: 1px solid #f0f0f0;
@@ -135,8 +136,8 @@ const PageButtonWithArrow = styled.button<{ disabled?: boolean }>`
   }
 
   svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
   }
 `;
 
