@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 100px 1fr;
-  padding: 80px 0px 30px;
+  grid-template-columns: 80px 1fr;
+  padding: 60px 0px 0px;
   height: 100%;
   width: 100%;
 `;
@@ -15,7 +15,7 @@ const Menu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
   padding: 30px 0px;
 `;
 
@@ -23,14 +23,14 @@ const MenuItem = styled.div<{ selected?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   background-color: ${({ selected }) => (selected ? '#729d39' : 'transparent')};
   &:hover {
     background-color: ${({ selected }) => (selected ? '#729d39' : '#f3f4f6')};
   }
   svg {
-    width: 60px;
+    width: 50px;
     color: ${({ selected }) => (selected ? '#ffffff' : '#6f7787')};
   }
 `;

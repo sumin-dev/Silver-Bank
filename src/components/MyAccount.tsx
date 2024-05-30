@@ -22,20 +22,20 @@ const Wrapper = styled.div`
 
 const Title = styled.h2`
   display: inline-block;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 700;
   color: #171a1f;
 `;
 
 const AccountBtn = styled.button`
   width: 200px;
-  height: 48px;
-  font-size: 28px;
+  height: 42px;
+  font-size: 24px;
   color: #ffffff;
   background: #729d39;
   border: none;
   cursor: pointer;
-  margin-left: 30px;
+  margin-left: 20px;
   &:hover,
   &:active {
     background: #6b8e23;
@@ -43,10 +43,10 @@ const AccountBtn = styled.button`
 `;
 
 const InfoBox = styled.div`
-  padding: 30px;
+  padding: 30px 30px 0px;
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 10px;
   font-size: 28px;
 `;
 
@@ -54,7 +54,7 @@ const Info = styled.div`
   display: flex;
   align-items: center;
   svg {
-    width: 48px;
+    width: 42px;
     margin-right: 20px;
     color: #9095a0;
     cursor: pointer;
@@ -65,14 +65,14 @@ const Info = styled.div`
 `;
 
 const InfoText = styled.span`
-  font-size: 40px;
-  font-weight: 600;
+  font-size: 36px;
+  font-weight: 500;
   color: #9095a0;
 `;
 
 const InfoTextWithClick = styled.span`
-  font-size: 40px;
-  font-weight: 600;
+  font-size: 36px;
+  font-weight: 500;
   color: #9095a0;
   text-decoration: underline;
   cursor: pointer;
@@ -85,7 +85,7 @@ const Modal = styled.div`
   transform: translateX(-50%);
   background-color: #f3f4f6;
   color: #9095a0;
-  font-size: 24px;
+  font-size: 20px;
   padding: 20px 40px;
   border-radius: 5px;
 `;

@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 700;
   color: #171a1f;
 `;
@@ -16,8 +16,8 @@ const Title = styled.h2`
 const LogoutBtn = styled.button`
   margin: 30px;
   width: 200px;
-  height: 48px;
-  font-size: 28px;
+  height: 42px;
+  font-size: 24px;
   color: #ffffff;
   background: tomato;
   border: none;
