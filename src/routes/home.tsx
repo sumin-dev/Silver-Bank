@@ -5,10 +5,10 @@ import { auth, db } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import LoadingScreen from '../components/LoadingScreen';
 import UpdateUserInfoModal from '../components/UpdateUserInfoModal';
+import SendedAccounts from '../components/SendedAccounts';
 
 const Wrapper = styled.div`
   display: grid;
-  gap: 20px;
   grid-template-rows: 1fr 1.5fr;
 `;
 
@@ -81,6 +81,7 @@ const Home: React.FC = () => {
     <Wrapper>
       {showModal && <UpdateUserInfoModal onClose={onModalClose} />}
       <MyAccount account={account} setAccount={setAccount} />
+      <SendedAccounts account={account} />
     </Wrapper>
   );
 };

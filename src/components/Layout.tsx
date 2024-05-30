@@ -33,28 +33,11 @@ const MenuItem = styled.div<{ selected?: boolean }>`
     width: 60px;
     color: ${({ selected }) => (selected ? '#ffffff' : '#6f7787')};
   }
-  &.log-out {
-    cursor: pointer;
-    border-color: tomato;
-    svg {
-      color: tomato;
-    }
-  }
 `;
 
 export default function Layout() {
   const location = useLocation();
   const [selectedMenu, setSelectedMenu] = useState(location.pathname);
-
-  // const navigate = useNavigate();
-  // const onLogOut = async () => {
-  //   const ok = confirm('로그아웃하시겠습니까?');
-
-  //   if (ok) {
-  //     await auth.signOut();
-  //     navigate('/login');
-  //   }
-  // };
 
   useEffect(() => {
     setSelectedMenu(location.pathname);
@@ -109,28 +92,6 @@ export default function Layout() {
             </MenuItem>
           </Link>
 
-          <Link to={'/chart'}>
-            <MenuItem
-              selected={selectedMenu === '/chart'}
-              onClick={() => setSelectedMenu('/chart')}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z"
-                />
-              </svg>
-            </MenuItem>
-          </Link>
-
           <Link to={'/profile'}>
             <MenuItem
               selected={selectedMenu === '/profile'}
@@ -157,23 +118,6 @@ export default function Layout() {
               </svg>
             </MenuItem>
           </Link>
-
-          {/* <MenuItem className="log-out" onClick={onLogOut}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
-              />
-            </svg>
-          </MenuItem> */}
         </Menu>
         <Outlet />
       </Wrapper>

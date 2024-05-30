@@ -10,7 +10,6 @@ import Layout from './components/Layout.tsx';
 import { auth } from './firebase.ts';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 import AuthLayout from './components/AuthLayout.tsx';
-import Chart from './routes/chart.tsx';
 import Profile from './routes/profile.tsx';
 import Transfer from './routes/transfer.tsx';
 import TransferComplete from './routes/transfer-complete.tsx';
@@ -28,10 +27,6 @@ const router = createBrowserRouter([
       {
         path: '',
         element: <Home />,
-      },
-      {
-        path: 'chart',
-        element: <Chart />,
       },
       {
         path: 'profile',

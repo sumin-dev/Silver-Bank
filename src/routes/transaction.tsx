@@ -23,7 +23,7 @@ const TitleBox = styled.div``;
 const Title = styled.h2`
   display: inline-block;
   margin-right: 20px;
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 700;
   color: #171a1f;
 `;
@@ -76,7 +76,7 @@ const GridCell = styled.div`
 `;
 
 const GridCellWithRed = styled(GridCell)`
-  color: red;
+  color: tomato;
   text-align: right;
 `;
 
@@ -173,7 +173,7 @@ const Transaction: React.FC = () => {
 
     const snapshot = await getDocs(accountQuery);
 
-    if (snapshot.docs.length) {
+    if (!snapshot.empty) {
       const doc = snapshot.docs[0].data();
       const account = {
         number: doc.number,
@@ -194,6 +194,7 @@ const Transaction: React.FC = () => {
 
   const fetchTransactions = async () => {
     if (!account) return;
+    setLoading(true);
 
     try {
       const sendTransactionsQuery = query(
