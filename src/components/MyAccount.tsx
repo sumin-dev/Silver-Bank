@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { changeNumberToKorean } from '../utils/changeNumberToKorean';
 import {
-  addDoc,
+  doc,
   collection,
   getDocs,
   query,
   serverTimestamp,
   where,
+  writeBatch,
 } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { generateAccountNumber } from '../utils/generateAccountNumber';
@@ -21,14 +22,14 @@ const Wrapper = styled.div`
 
 const Title = styled.h2`
   display: inline-block;
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 700;
   color: #171a1f;
 `;
 
 const AccountBtn = styled.button`
   width: 200px;
-  height: 52px;
+  height: 48px;
   font-size: 28px;
   color: #ffffff;
   background: #729d39;
@@ -37,15 +38,16 @@ const AccountBtn = styled.button`
   margin-left: 30px;
   &:hover,
   &:active {
-    background: #36622b;
+    background: #6b8e23;
   }
 `;
 
 const InfoBox = styled.div`
-  padding: 60px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+  font-size: 28px;
 `;
 
 const Info = styled.div`
@@ -123,10 +125,10 @@ const MyAccount: React.FC<MyAccountProps> = ({ account, setAccount }) => {
       );
 
       const snapshot = await getDocs(userQuery);
-      const doc = snapshot.docs[0];
+      const userDoc = snapshot.docs[0];
 
       const newAccount = {
-        id: doc.id,
+        id: userDoc.id,
         number: generateAccountNumber(),
         valance: Math.floor(
           Math.random() * (maxValance - minValance) + minValance
@@ -134,11 +136,99 @@ const MyAccount: React.FC<MyAccountProps> = ({ account, setAccount }) => {
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
         deletedAt: null,
-        username: doc.data().username,
+        username: userDoc.data().username,
         userId: user.uid,
       };
 
-      await addDoc(collection(db, 'accounts'), newAccount);
+      const batch = writeBatch(db);
+
+      batch.set(doc(collection(db, 'accounts')), newAccount);
+
+      batch.set(doc(collection(db, 'transactions')), {
+        senderName: '은행장',
+        senderNumber: '0287-6250-7205',
+        receiverName: newAccount.username,
+        receiverNumber: newAccount.number,
+        amount: newAccount.valance,
+        memo: '계좌 개설 축하금',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+        deletedAt: null,
+      });
+
+      batch.set(doc(collection(db, 'transactions')), {
+        senderName: newAccount.username,
+        senderNumber: newAccount.number,
+        receiverName: '관리자',
+        receiverNumber: '0757-4055-7524',
+        amount: 1000000,
+        memo: '출금 샘플 데이터 (관리자)',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+        deletedAt: null,
+      });
+
+      batch.set(doc(collection(db, 'transactions')), {
+        senderName: newAccount.username,
+        senderNumber: newAccount.number,
+        receiverName: '은행장',
+        receiverNumber: '0287-6250-7205',
+        amount: 5000,
+        memo: '출금 샘플 데이터 (은행장)',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+        deletedAt: null,
+      });
+
+      batch.set(doc(collection(db, 'transactions')), {
+        senderName: newAccount.username,
+        senderNumber: newAccount.number,
+        receiverName: '황수민',
+        receiverNumber: '6355-0686-0415',
+        amount: 10000,
+        memo: '출금 샘플 데이터 (황수민)',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+        deletedAt: null,
+      });
+
+      batch.set(doc(collection(db, 'transactions')), {
+        senderName: newAccount.username,
+        senderNumber: newAccount.number,
+        receiverName: '개발자',
+        receiverNumber: '8685-4513-2202',
+        amount: 28000,
+        memo: '출금 샘플 데이터 (개발자)',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+        deletedAt: null,
+      });
+
+      batch.set(doc(collection(db, 'transactions')), {
+        senderName: newAccount.username,
+        senderNumber: newAccount.number,
+        receiverName: '오감자',
+        receiverNumber: '8846-4875-3545',
+        amount: 77000,
+        memo: '출금 샘플 데이터 (오감자)',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+        deletedAt: null,
+      });
+
+      batch.set(doc(collection(db, 'transactions')), {
+        senderName: newAccount.username,
+        senderNumber: newAccount.number,
+        receiverName: '자갈치',
+        receiverNumber: '5090-8612-0990',
+        amount: 131000,
+        memo: '출금 샘플 데이터 (자갈치)',
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+        deletedAt: null,
+      });
+
+      await batch.commit();
 
       setAccount(newAccount);
     } catch (error) {

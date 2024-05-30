@@ -25,7 +25,7 @@ const Wrapper = styled.div`
 
 const Title = styled.h2`
   display: inline-block;
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 700;
   color: #171a1f;
 `;
@@ -123,6 +123,7 @@ const Transfer: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const account = location.state?.account as IAccount;
+  const receiver = location.state.receiver || '';
 
   const { speak } = useSpeechSynthesis();
   const onSoundClick = (text: string) => {
@@ -131,7 +132,7 @@ const Transfer: React.FC = () => {
 
   const [isLoading, setLoading] = useState<boolean>(false);
   const [formState, setFormState] = useState<FormState>({
-    receiver: '',
+    receiver,
     amount: '',
     memo: '',
   });
