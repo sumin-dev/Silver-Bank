@@ -5,6 +5,8 @@ import { collection, getDocs, orderBy, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import LoadingScreen from './LoadingScreen';
 import { useNavigate } from 'react-router-dom';
+import { copyToClipboard } from '../utils/copyToClipboard';
+import CopyModal from './CopyModal';
 
 const Wrapper = styled.div`
   padding: 0px 60px;
@@ -77,6 +79,11 @@ const GridCellWithEmpty = styled(GridCell)`
   &:nth-child(even) {
     background-color: #ffffff;
   }
+`;
+
+const GridCellWithClick = styled(GridCell)`
+  text-decoration: underline;
+  cursor: pointer;
 `;
 
 const TransferBtn = styled.button`
@@ -159,6 +166,7 @@ const SendedAccounts: React.FC<SendedAccountsProps> = ({ account }) => {
   );
   const [isLoading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [copySuccess, setCopySuccess] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -271,7 +279,13 @@ const SendedAccounts: React.FC<SendedAccountsProps> = ({ account }) => {
               <React.Fragment key={sendedAccount.accountNumber}>
                 <GridCell>{sendedAccount.accountName}</GridCell>
                 <GridCell>실버뱅크</GridCell>
-                <GridCell>{sendedAccount.accountNumber}</GridCell>
+                <GridCellWithClick
+                  onClick={() =>
+                    copyToClipboard(sendedAccount.accountNumber, setCopySuccess)
+                  }
+                >
+                  {sendedAccount.accountNumber}
+                </GridCellWithClick>
                 <GridCell>
                   <TransferBtn
                     onClick={() => {
@@ -353,6 +367,7 @@ const SendedAccounts: React.FC<SendedAccountsProps> = ({ account }) => {
       ) : (
         <InfoBox>송금한 계좌가 없습니다.</InfoBox>
       )}
+      <CopyModal copySuccess={copySuccess} />
     </Wrapper>
   );
 };

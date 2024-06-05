@@ -10,6 +10,8 @@ import {
 } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import LoadingScreen from '../components/LoadingScreen';
+import { copyToClipboard } from '../utils/copyToClipboard';
+import CopyModal from '../components/CopyModal';
 
 const Wrapper = styled.div`
   padding: 60px;
@@ -94,6 +96,11 @@ const GridCellWithEmpty = styled(GridCell)`
   }
 `;
 
+const GridCellWithClick = styled(GridCell)`
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
 const Pagination = styled.div<{ $visible: boolean }>`
   display: flex;
   justify-content: center;
@@ -161,6 +168,7 @@ const Transaction: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'send' | 'receive'>('all');
   const [isLoading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [copySuccess, setCopySuccess] = useState<boolean>(false);
 
   const fetchAccount = async () => {
     if (!user) return;
@@ -324,7 +332,13 @@ const Transaction: React.FC = () => {
           <React.Fragment key={transaction.id}>
             <GridCell>{transaction.accountName}</GridCell>
             <GridCell>실버뱅크</GridCell>
-            <GridCell>{transaction.accountNumber}</GridCell>
+            <GridCellWithClick
+              onClick={() =>
+                copyToClipboard(transaction.accountNumber, setCopySuccess)
+              }
+            >
+              {transaction.accountNumber}
+            </GridCellWithClick>
             {transaction.type === 'send' ? (
               <GridCellWithRed>{`- ${transaction.amount.toLocaleString()}`}</GridCellWithRed>
             ) : (
@@ -397,6 +411,7 @@ const Transaction: React.FC = () => {
           </svg>
         </PageButtonWithArrow>
       </Pagination>
+      <CopyModal copySuccess={copySuccess} />
     </Wrapper>
   );
 };

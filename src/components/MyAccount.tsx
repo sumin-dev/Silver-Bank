@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSpeechSynthesis } from 'react-speech-kit';
 import { changeNumberToKorean } from '../utils/changeNumberToKorean';
@@ -13,8 +13,9 @@ import {
 } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { generateAccountNumber } from '../utils/generateAccountNumber';
-import { CSSTransition } from 'react-transition-group';
 import { useNavigate } from 'react-router-dom';
+import { copyToClipboard } from '../utils/copyToClipboard';
+import CopyModal from './CopyModal';
 
 const Wrapper = styled.div`
   padding: 60px;
@@ -76,18 +77,6 @@ const InfoTextWithClick = styled.span`
   color: #9095a0;
   text-decoration: underline;
   cursor: pointer;
-`;
-
-const Modal = styled.div`
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #f3f4f6;
-  color: #9095a0;
-  font-size: 20px;
-  padding: 20px 40px;
-  border-radius: 5px;
 `;
 
 export interface IAccount {
@@ -245,16 +234,6 @@ const MyAccount: React.FC<MyAccountProps> = ({ account, setAccount }) => {
   };
 
   const [copySuccess, setCopySuccess] = useState<boolean>(false);
-  const nodeRef = useRef(null);
-  const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 1000);
-    } catch (error) {
-      console.error('복사 실패!');
-    }
-  };
 
   return (
     <Wrapper>
@@ -273,7 +252,11 @@ const MyAccount: React.FC<MyAccountProps> = ({ account, setAccount }) => {
           <Info>
             <svg
               onClick={() =>
-                onSoundClick(`실버뱅크 ${changeNumberToKorean(account.number)}`)
+                onSoundClick(
+                  `실버뱅크 ${changeNumberToKorean(
+                    account.number
+                  )} (예금주명: ${account.username})`
+                )
               }
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -289,8 +272,8 @@ const MyAccount: React.FC<MyAccountProps> = ({ account, setAccount }) => {
               />
             </svg>
             <InfoTextWithClick
-              onClick={() => copyToClipboard(`실버뱅크 ${account.number}`)}
-            >{`실버뱅크 ${account.number}`}</InfoTextWithClick>
+              onClick={() => copyToClipboard(account.number, setCopySuccess)}
+            >{`실버뱅크 ${account.number} (예금주명: ${account.username})`}</InfoTextWithClick>
           </Info>
 
           <Info>
@@ -315,15 +298,7 @@ const MyAccount: React.FC<MyAccountProps> = ({ account, setAccount }) => {
       ) : (
         <InfoBox>계좌가 없습니다.</InfoBox>
       )}
-      <CSSTransition
-        in={copySuccess}
-        timeout={300}
-        classNames="modal"
-        unmountOnExit
-        nodeRef={nodeRef}
-      >
-        <Modal ref={nodeRef}>복사되었습니다!</Modal>
-      </CSSTransition>
+      <CopyModal copySuccess={copySuccess} />
     </Wrapper>
   );
 };
