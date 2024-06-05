@@ -8,20 +8,20 @@ const PadContainer = styled.div`
 `;
 
 const PadButton = styled.button`
-  border: solid 1px #f0f0f0;
+  border: solid 1px ${({ theme }) => theme.colors.bgDarkGrey};
   font-size: 24px;
   cursor: pointer;
-  background-color: #f8f9fa;
+  background-color: ${({ theme }) => theme.colors.bgLightGrey};
   &:hover {
-    background-color: #f0f0f0;
+    background-color: ${({ theme }) => theme.colors.bgDarkGrey};
   }
 `;
 
 const SpecialButton = styled(PadButton)`
-  background-color: #d9534f;
-  color: white;
+  background-color: ${({ theme }) => theme.colors.numberPadRed};
+  color: ${({ theme }) => theme.colors.white};
   &:hover {
-    background-color: #c9302c;
+    background-color: ${({ theme }) => theme.colors.numberPadRedWithHover};
   }
 `;
 

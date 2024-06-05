@@ -3,19 +3,15 @@ import styled, { css } from 'styled-components';
 export const Wrapper = styled.div`
   width: 637px;
   height: 600px;
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.common.flexColumnCenter};
   justify-content: space-between;
-  align-items: center;
-  background: #f8f9fa;
+  background: ${({ theme }) => theme.colors.bgLightGrey};
   padding: 40px 60px;
 `;
 
 export const Title = styled.h1`
-  font-size: 32px;
+  ${({ theme }) => theme.common.title};
   line-height: 48px;
-  font-weight: 700;
-  color: #171a1f;
 `;
 
 export const Form = styled.form`
@@ -41,7 +37,8 @@ const commonInputStyles = css`
   height: 52px;
   font-size: 18px;
   line-height: 28px;
-  background-color: #f3f4f6;
+  color: ${({ theme }) => theme.colors.black};
+  background-color: ${({ theme }) => theme.colors.bgDarkGrey};
   border-width: 0px;
   outline: none;
   background-repeat: no-repeat;
@@ -67,23 +64,21 @@ export const InputWithPassword = styled.input`
 export const InputWithSubmit = styled.input`
   width: 100%;
   height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => theme.common.flexCenter};
   font-size: 18px;
   line-height: 28px;
   font-weight: 400;
-  color: #ffffff;
-  background: #729d39;
+  color: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.main};
   border: none;
   cursor: pointer;
 `;
 
 export const Error = styled.div<{ $visible: boolean }>`
   height: 16px;
-  visibility: ${(props) => (props.$visible ? 'visible' : 'hidden')};
+  visibility: ${({ $visible }) => ($visible ? 'visible' : 'hidden')};
   font-weight: 600;
-  color: tomato;
+  color: ${({ theme }) => theme.colors.red};
 `;
 
 export const Switcher = styled.span`

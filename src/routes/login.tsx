@@ -29,7 +29,7 @@ const Divider = styled.div`
   &::after {
     content: '';
     flex: 1;
-    border-bottom: 1px solid #dee1e6;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.borderGrey};
   }
 
   &::before {
@@ -43,7 +43,7 @@ const Divider = styled.div`
 
 const DividerText = styled.span`
   line-height: 22px;
-  color: #171a1f;
+  color: ${({ theme }) => theme.colors.black};
 `;
 
 interface FormState {

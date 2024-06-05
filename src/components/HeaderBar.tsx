@@ -5,10 +5,8 @@ export const Header = styled.header`
   position: absolute;
   top: 20px;
   left: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0;
+  font-size: 0px;
+  ${({ theme }) => theme.common.flexCenter};
 `;
 export const Logo = styled.img`
   height: 40px;

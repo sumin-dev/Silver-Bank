@@ -13,46 +13,33 @@ import {
 import NumberPad from './NumberPad';
 
 const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  ${({ theme }) => theme.common.overlay};
 `;
 
 const InfoBox = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   padding: 20px;
-  border: 2px solid #729d39;
+  border: 2px solid ${({ theme }) => theme.colors.main};
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: ${({ theme }) => theme.colors.white};
   font-size: 24px;
   font-weight: 600;
-  color: #729d39;
+  color: ${({ theme }) => theme.colors.main};
 `;
 
 const CancelBtn = styled.div`
   width: 100%;
   height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  ${({ theme }) => theme.common.flexCenter};
   font-size: 18px;
   line-height: 28px;
   font-weight: 400;
-  color: #ffffff;
-  background: #729d39;
+  color: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.main};
   border: none;
   cursor: pointer;
-  background-color: #9095a0;
+  background-color: ${({ theme }) => theme.colors.red};
 `;
 
 interface PaymentPasswordModalProps {

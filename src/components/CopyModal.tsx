@@ -7,8 +7,8 @@ const Modal = styled.div`
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #f3f4f6;
-  color: #9095a0;
+  background-color: ${({ theme }) => theme.colors.bgDarkGrey};
+  color: ${({ theme }) => theme.colors.textGrey};
   font-size: 20px;
   padding: 20px 40px;
   border-radius: 5px;

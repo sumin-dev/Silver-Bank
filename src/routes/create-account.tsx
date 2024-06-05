@@ -59,10 +59,6 @@ const CreateAccount: React.FC = () => {
 
       await createUserWithEmailAndPassword(auth, email, password);
 
-      // await updateProfile(credentials.user, {
-      //   displayName: name,
-      // });
-
       navigate('/');
     } catch (error) {
       if (error instanceof FirebaseError) {

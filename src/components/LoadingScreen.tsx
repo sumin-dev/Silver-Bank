@@ -23,8 +23,8 @@ const spin = keyframes`
 `;
 
 const Spinner = styled.div`
-  border: 16px solid #f3f3f3;
-  border-top: 16px solid #729d39;
+  border: 16px solid ${({ theme }) => theme.colors.borderGrey};
+  border-top: 16px solid ${({ theme }) => theme.colors.main};
   border-radius: 50%;
   width: 120px;
   height: 120px;

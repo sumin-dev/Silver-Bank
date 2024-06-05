@@ -13,26 +13,24 @@ const fadeIn = keyframes`
 `;
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  ${({ theme }) => theme.common.flexColumnCenter};
   justify-content: center;
   height: 100%;
-  background-color: #f9f9f9;
+  background-color: ${({ theme }) => theme.colors.bgLightGrey};
   animation: ${fadeIn} 1s ease-in-out;
 `;
 
 const Title = styled.h1`
   font-size: 60px;
   font-weight: 700;
-  color: #729d39;
+  color: ${({ theme }) => theme.colors.main};
   margin-bottom: 20px;
   animation: ${fadeIn} 1.5s ease-in-out;
 `;
 
 const Message = styled.p`
   font-size: 28px;
-  color: #9095a0;
+  color: ${({ theme }) => theme.colors.textGrey};
   margin-bottom: 40px;
   animation: ${fadeIn} 2s ease-in-out;
 `;
@@ -40,15 +38,15 @@ const Message = styled.p`
 const Button = styled.button`
   padding: 10px 20px;
   font-size: 30px;
-  color: #ffffff;
-  background-color: #729d39;
+  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.main};
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #4b732a;
+    background-color: ${({ theme }) => theme.colors.mainWithHover};
   }
 `;
 

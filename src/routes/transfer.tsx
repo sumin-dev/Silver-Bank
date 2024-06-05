@@ -25,9 +25,7 @@ const Wrapper = styled.div`
 
 const Title = styled.h2`
   display: inline-block;
-  font-size: 36px;
-  font-weight: 700;
-  color: #171a1f;
+  ${({ theme }) => theme.common.title};
 `;
 
 const Form = styled.form`
@@ -43,7 +41,7 @@ const InputBox = styled.div`
   svg {
     width: 48px;
     margin-right: 20px;
-    color: #9095a0;
+    color: ${({ theme }) => theme.colors.textGrey};
     cursor: pointer;
     &:hover {
       transform: scale(1.1);
@@ -54,7 +52,7 @@ const InputBox = styled.div`
 const Label = styled.label`
   font-size: 36px;
   font-weight: 600;
-  color: #9095a0;
+  color: ${({ theme }) => theme.colors.textGrey};
   flex-shrink: 0;
 `;
 
@@ -62,13 +60,13 @@ const Input = styled.input`
   padding: 10px 20px;
   margin-left: 30px;
   font-size: 28px;
-  color: #729d39;
-  border: 2px solid #729d39;
+  color: ${({ theme }) => theme.colors.main};
+  border: 2px solid ${({ theme }) => theme.colors.main};
   border-radius: 4px;
   outline: none;
   flex-grow: 1;
   &::placeholder {
-    color: #9095a0;
+    color: ${({ theme }) => theme.colors.textGrey};
   }
 
   /* For Chrome, Safari, Edge, Opera */
@@ -89,14 +87,12 @@ const BtnContainer = styled.div`
 `;
 
 const InputWithSubmit = styled.input`
+  ${({ theme }) => theme.common.flexCenter};
   flex-grow: 1;
   height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 30px;
-  color: #ffffff;
-  background: #729d39;
+  color: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.main};
   border: none;
   cursor: pointer;
 `;
@@ -105,10 +101,10 @@ const CancelBtn = styled.button`
   flex-grow: 1;
   height: 60px;
   font-size: 30px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.white};
   border: none;
   cursor: pointer;
-  background-color: #9095a0;
+  background-color: ${({ theme }) => theme.colors.red};
 `;
 
 const Error = styled.div<{ $visible: boolean }>`
@@ -117,8 +113,8 @@ const Error = styled.div<{ $visible: boolean }>`
   margin-top: 50px;
   padding: 10px;
   font-size: 24px;
-  color: #721c24;
-  background-color: #f8d7da;
+  color: ${({ theme }) => theme.colors.red};
+  background-color: ${({ theme }) => theme.colors.bgDarkGrey};
   border-radius: 4px;
   visibility: ${(props) => (props.$visible ? 'visible' : 'hidden')};
 `;

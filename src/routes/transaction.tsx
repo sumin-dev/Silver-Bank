@@ -24,23 +24,24 @@ const TitleBox = styled.div``;
 
 const Title = styled.h2`
   display: inline-block;
+  ${({ theme }) => theme.common.title};
   margin-right: 20px;
-  font-size: 36px;
-  font-weight: 700;
-  color: #171a1f;
 `;
 
 const FilterButton = styled.button<{ $active: boolean }>`
   padding: 5px 10px;
   margin: 0 10px;
   font-size: 20px;
-  color: ${(props) => (props.$active ? '#ffffff' : '#171a1f')};
-  background-color: ${(props) => (props.$active ? '#729d39' : '#ffffff')};
-  border: 1px solid #729d39;
+  color: ${({ $active, theme }) =>
+    $active ? theme.colors.white : theme.colors.black};
+  background-color: ${({ $active, theme }) =>
+    $active ? theme.colors.main : theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.main};
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) => (props.$active ? '#6b8e23' : '#f2f2f2')};
+    background-color: ${({ $active, theme }) =>
+      $active ? theme.colors.main : theme.colors.bgDarkGrey};
   }
 `;
 
@@ -52,16 +53,14 @@ const GridContainer = styled.div`
 `;
 
 const GridHeader = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.common.flexCenter};
   height: 46px;
-  background-color: #729d39;
-  color: white;
+  background-color: ${({ theme }) => theme.colors.main};
+  color: ${({ theme }) => theme.colors.white};
   padding: 18px;
   font-size: 22px;
   font-weight: 600;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderGrey};
 `;
 
 const GridCell = styled.div`
@@ -69,30 +68,30 @@ const GridCell = styled.div`
   padding: 14px;
   text-align: left;
   font-size: 22px;
-  color: #9095a0;
+  color: ${({ theme }) => theme.colors.textGrey};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.borderGrey};
   &:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: ${({ theme }) => theme.colors.bgLightGrey};
   }
 `;
 
 const GridCellWithRed = styled(GridCell)`
-  color: tomato;
+  color: ${({ theme }) => theme.colors.red};
   text-align: right;
 `;
 
 const GridCellWithBlue = styled(GridCell)`
-  color: blue;
+  color: ${({ theme }) => theme.colors.blue};
   text-align: right;
 `;
 
 const GridCellWithEmpty = styled(GridCell)`
   border-bottom: none;
   &:nth-child(even) {
-    background-color: #ffffff;
+    background-color: ${({ theme }) => theme.colors.white};
   }
 `;
 
@@ -109,37 +108,39 @@ const Pagination = styled.div<{ $visible: boolean }>`
 `;
 
 const PageButton = styled.button<{ selected?: boolean }>`
+  ${({ theme }) => theme.common.flexCenter};
   width: 40px;
   height: 40px;
   margin: 0 5px;
   font-size: 16px;
-  color: ${(props) => (props.selected ? '#ffffff' : '#171a1f')};
-  background-color: ${(props) => (props.selected ? '#729d39;' : '#ffffff')};
-  border: 1px solid #f0f0f0;
-  cursor: ${(props) => (props.selected ? 'default' : 'pointer')};
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: ${({ selected, theme }) =>
+    selected ? theme.colors.white : theme.colors.black};
+  background-color: ${({ selected, theme }) =>
+    selected ? theme.colors.main : theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.bgDarkGrey};
+  cursor: ${({ selected }) => (selected ? 'default' : 'pointer')};
 
   &:hover {
-    background-color: ${(props) => (props.selected ? '#729d39;' : '#f2f2f2')};
+    background-color: ${({ selected, theme }) =>
+      selected ? theme.colors.main : theme.colors.bgLightGrey};
   }
 `;
 
 const PageButtonWithArrow = styled.button<{ disabled?: boolean }>`
+  ${({ theme }) => theme.common.flexCenter};
   width: 40px;
   height: 40px;
   margin: 0 5px;
-  color: ${(props) => (props.disabled ? '#ccc' : '#171a1f')};
-  background-color: ${(props) => (props.disabled ? '#f0f0f0' : '#ffffff')};
-  border: 1px solid #f0f0f0;
-  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: ${({ disabled, theme }) =>
+    disabled ? theme.colors.borderGrey : theme.colors.black};
+  background-color: ${({ disabled, theme }) =>
+    disabled ? theme.colors.bgDarkGrey : theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.bgDarkGrey};
+  cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
 
   &:hover {
-    background-color: ${(props) => (props.disabled ? '#f0f0f0' : '#f2f2f2')};
+    background-color: ${({ disabled, theme }) =>
+      disabled ? theme.colors.bgDarkGrey : theme.colors.bgLightGrey};
   }
 
   svg {

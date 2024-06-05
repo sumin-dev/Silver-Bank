@@ -23,23 +23,21 @@ const Wrapper = styled.div`
 
 const Title = styled.h2`
   display: inline-block;
-  font-size: 36px;
-  font-weight: 700;
-  color: #171a1f;
+  ${({ theme }) => theme.common.title};
 `;
 
 const AccountBtn = styled.button`
   width: 200px;
   height: 42px;
   font-size: 24px;
-  color: #ffffff;
-  background: #729d39;
+  color: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.main};
   border: none;
   cursor: pointer;
   margin-left: 20px;
   &:hover,
   &:active {
-    background: #6b8e23;
+    background: ${({ theme }) => theme.colors.mainWithHover};
   }
 `;
 
@@ -57,7 +55,7 @@ const Info = styled.div`
   svg {
     width: 42px;
     margin-right: 20px;
-    color: #9095a0;
+    color: ${({ theme }) => theme.colors.textGrey};
     cursor: pointer;
     &:hover {
       transform: scale(1.1);
@@ -68,13 +66,10 @@ const Info = styled.div`
 const InfoText = styled.span`
   font-size: 36px;
   font-weight: 500;
-  color: #9095a0;
+  color: ${({ theme }) => theme.colors.textGrey};
 `;
 
-const InfoTextWithClick = styled.span`
-  font-size: 36px;
-  font-weight: 500;
-  color: #9095a0;
+const InfoTextWithClick = styled(InfoText)`
   text-decoration: underline;
   cursor: pointer;
 `;

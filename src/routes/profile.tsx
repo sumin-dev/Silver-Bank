@@ -8,9 +8,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 36px;
-  font-weight: 700;
-  color: #171a1f;
+  ${({ theme }) => theme.common.title};
 `;
 
 const LogoutBtn = styled.button`
@@ -18,8 +16,8 @@ const LogoutBtn = styled.button`
   width: 200px;
   height: 42px;
   font-size: 24px;
-  color: #ffffff;
-  background: tomato;
+  color: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.red};
   border: none;
   cursor: pointer;
 `;
