@@ -273,7 +273,11 @@ const MyAccount: React.FC<MyAccountProps> = ({ account, setAccount }) => {
           <Info>
             <svg
               onClick={() =>
-                onSoundClick(`실버뱅크 ${changeNumberToKorean(account.number)}`)
+                onSoundClick(
+                  `실버뱅크 ${changeNumberToKorean(
+                    account.number
+                  )} (예금주명: ${account.username})`
+                )
               }
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -290,7 +294,7 @@ const MyAccount: React.FC<MyAccountProps> = ({ account, setAccount }) => {
             </svg>
             <InfoTextWithClick
               onClick={() => copyToClipboard(`실버뱅크 ${account.number}`)}
-            >{`실버뱅크 ${account.number}`}</InfoTextWithClick>
+            >{`실버뱅크 ${account.number} (예금주명: ${account.username})`}</InfoTextWithClick>
           </Info>
 
           <Info>
