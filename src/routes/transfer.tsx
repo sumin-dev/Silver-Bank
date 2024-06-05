@@ -70,6 +70,16 @@ const Input = styled.input`
   &::placeholder {
     color: #9095a0;
   }
+
+  /* For Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* For Firefox */
+  -moz-appearance: textfield;
 `;
 
 const BtnContainer = styled.div`
